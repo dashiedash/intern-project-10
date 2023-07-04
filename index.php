@@ -26,7 +26,7 @@ $stockSystemData = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <h1 class="mb-4 text-3xl font-bold">Stock Management System</h1>
 
     <div class="mb-4">
-      <a href="#" class="rounded bg-blue-500 py-2 px-4 text-white hover:bg-blue-600">Create</a>
+      <a href="create.php" class="rounded bg-blue-500 py-2 px-4 text-white hover:bg-blue-600">Create</a>
     </div>
 
     <table class="min-w-full border border-gray-200 bg-white">
@@ -34,6 +34,7 @@ $stockSystemData = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <tr>
           <th class="border-b py-2 px-4">Item ID</th>
           <th class="border-b py-2 px-4">Item Name</th>
+          <th class="border-b py-2 px-4">Brand</th>
           <th class="border-b py-2 px-4">Stock Amount</th>
           <th class="border-b py-2 px-4">Action</th>
         </tr>
@@ -43,6 +44,7 @@ $stockSystemData = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <tr>
             <td class="py-2 px-4 border-b"><?php echo $row['id']; ?></td>
             <td class="py-2 px-4 border-b"><?php echo $row['item-name']; ?></td>
+            <td class="py-2 px-4 border-b"><?php echo $row['brand']; ?></td>
             <td class="py-2 px-4 border-b"><?php echo $row['amount']; ?></td>
             <td class="py-2 px-4 border-b">
               <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Edit</button>
