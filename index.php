@@ -1,3 +1,25 @@
+<?php
+// Database configuration
+$host = 'localhost';
+$dbName = 'project-10';
+$username = 'root';
+$password = '';
+
+// Establish database connection
+try {
+  $pdo = new PDO("mysql:host=$host;dbname=$dbName", $username, $password);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+  die("Connection failed: " . $e->getMessage());
+}
+
+// Retrieve stock system data from the database
+$query = 'SELECT * FROM `stock-system`';
+$stmt = $pdo->prepare($query);
+$stmt->execute();
+$stockSystemData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,15 +48,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="border-b py-2 px-4">1</td>
-          <td class="border-b py-2 px-4">Item 1</td>
-          <td class="border-b py-2 px-4">10</td>
-          <td class="border-b py-2 px-4">
-            <button class="rounded bg-blue-500 py-2 px-4 text-white hover:bg-blue-600">Edit</button>
-            <button class="rounded bg-red-500 py-2 px-4 text-white hover:bg-red-600">Delete</button>
-          </td>
-        </tr>
+        <?php foreach ($stockSystemData as $row) : ?>
+          <tr>
+            <td class="py-2 px-4 border-b"><?php echo $row['id']; ?></td>
+            <td class="py-2 px-4 border-b"><?php echo $row['item-name']; ?></td>
+            <td class="py-2 px-4 border-b"><?php echo $row['amount']; ?></td>
+            <td class="py-2 px-4 border-b">
+              <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Edit</button>
+              <button class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600">Delete</button>
+            </td>
+          </tr>
+        <?php endforeach; ?>
       </tbody>
     </table>
   </div>
