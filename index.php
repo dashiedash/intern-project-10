@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
 
 <body class="bg-gray-100">
   <div class="container mx-auto p-4">
-    <h1 class="mb-4 text-3xl font-bold">Stock Management System</h1>
+    <h1 class="mb-4 text-3xl font-bold font-poppins">Inventory Management System</h1>
 
     <div class="mb-4">
       <a href="create.php" class="rounded bg-blue-500 py-2 px-4 text-white hover:bg-blue-600">Create</a>
@@ -65,7 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
             <td class="py-2 px-4 border-b"><?php echo $row['brand']; ?></td>
             <td class="py-2 px-4 border-b"><?php echo $row['amount']; ?></td>
             <td class="py-2 px-4 border-b">
-              <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Edit</button>
+              <a href="update.php?id=<?php echo $row['id']; ?>" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Edit</a>
+
               <form class="inline" method="POST" action="index.php">
                 <input type="hidden" name="delete" value="<?php echo $row['id']; ?>">
                 <button class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600" onclick="confirmDelete()">Delete</button>
