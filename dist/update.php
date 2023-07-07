@@ -1,6 +1,5 @@
 <?php
 // update.php
-
 include 'connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -47,44 +46,29 @@ $brands = $stmt->fetchAll(PDO::FETCH_COLUMN);
 <body class="bg-[#f8f9f5] text-[#14170d] roboto">
     <main class="m-3 p-3 max-w-md mx-auto">
         <h1 class="mb-4 text-3xl font-bold text-center">Edit Item</h1>
-        <div class=" container p-4">
+        <div class="container p-4">
             <a href="index.php" class="mb-4 rounded py-1 px-3 hover:text-cyan-800 font-bold"><i class="fa-solid fa-arrow-left"></i> Back</a>
             <div class="bg-[#eaedde] p-7 my-3 flex justify-center rounded-xl">
                 <form class="mb-4" method="POST" action="update.php?id=<?php echo $id; ?>">
                     <input type="hidden" name="id" value="<?php echo $item['id']; ?>">
-
                     <label for="brand" class="block font-bold mb-1">Brand:</label>
                     <input type="text" id="brand" name="brand" class="w-full p-2 mb-4" list="brandList" required value="<?php echo htmlspecialchars($item['brand']); ?>">
                     <datalist id="brandList">
-                        <?php
-                        // Output options for the brand datalist
-                        foreach ($brands as $brandOption) {
-                            echo '<option value="' . htmlspecialchars($brandOption) . '">';
-                        }
-                        ?>
+                        <?php foreach ($brands as $brandOption) : ?>
+                            <option value="<?php echo htmlspecialchars($brandOption); ?>">
+                            <?php endforeach; ?>
                     </datalist>
-
                     <label for="item_name" class="block font-bold mb-1">Item Name:</label>
                     <input type="text" id="item-name" name="item-name" class="w-full p-2 mb-4" value="<?php echo htmlspecialchars($item['item-name']); ?>">
-
                     <label for="stock_amount" class="block font-bold mb-1">Stock Amount:</label>
                     <input type="number" id="amount" name="amount" class="w-full p-2 mb-4" value="<?php echo $item['amount']; ?>">
-
                     <button type="submit" class="rounded bg-cyan-800 py-2 px-4 text-white hover:bg-cyan-700" onclick="confirmSubmit()">Update</button>
                 </form>
             </div>
         </div>
     </main>
-
+    <script src="script.js"></script>
+    <script src="https://kit.fontawesome.com/a7437f466d.js" crossorigin="anonymous"></script>
 </body>
-
-<script>
-    window.onload = function() {
-        document.getElementById('brand').focus();
-    };
-</script>
-
-<script src="script.js"></script>
-<script src="https://kit.fontawesome.com/a7437f466d.js" crossorigin="anonymous"></script>
 
 </html>
